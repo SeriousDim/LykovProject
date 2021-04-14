@@ -1,0 +1,10 @@
+C:\My folder\Projects\LykovProject\LykovProject\bin\Debug\LykovProject.exe.config
+C:\My folder\Projects\LykovProject\LykovProject\bin\Debug\LykovProject.exe
+C:\My folder\Projects\LykovProject\LykovProject\bin\Debug\LykovProject.pdb
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.csprojAssemblyReference.cache
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.Form1.resources
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.Properties.Resources.resources
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.csproj.GenerateResource.cache
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.csproj.CoreCompileInputs.cache
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.exe
+C:\My folder\Projects\LykovProject\LykovProject\obj\Debug\LykovProject.pdb

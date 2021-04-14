@@ -1,0 +1,13 @@
+C:\My folder\Projects\LykovProject\LykovProject\bin\Release\LykovProject.exe.config
+C:\My folder\Projects\LykovProject\LykovProject\bin\Release\LykovProject.exe
+C:\My folder\Projects\LykovProject\LykovProject\bin\Release\LykovProject.pdb
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.Form1.resources
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.Properties.Resources.resources
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.csproj.GenerateResource.cache
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.csproj.CoreCompileInputs.cache
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.exe
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.pdb
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.csprojAssemblyReference.cache
+C:\My folder\Projects\LykovProject\LykovProject\bin\Release\d2dlibexport.dll
+C:\My folder\Projects\LykovProject\LykovProject\bin\Release\d2dwinform.dll
+C:\My folder\Projects\LykovProject\LykovProject\obj\Release\LykovProject.csproj.CopyComplete
