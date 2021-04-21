@@ -57,8 +57,8 @@ namespace LykovProject
 
         private void ShowHoveredCell(Graphics g)
         {
-            var indX = (int)Math.Floor(((double)cursor.X - x) / CELL_SIZE * scale);
-            var indY = (int)Math.Floor((double)cursor.Y / CELL_SIZE * scale);
+            var indX = (int)Math.Floor(((double)cursor.X - x) * (1/scale) / CELL_SIZE);
+            var indY = (int)Math.Floor((double)cursor.Y * (1 / scale) / CELL_SIZE);
             g.FillRectangle(brushRed, CELL_SIZE * indX, CELL_SIZE * indY, CELL_SIZE, CELL_SIZE);
         }
 

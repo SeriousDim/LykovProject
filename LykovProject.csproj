@@ -76,6 +76,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Data\Enums.cs" />
+    <Compile Include="Model\Data\Interfaces\IChangable.cs" />
+    <Compile Include="Model\Data\Interfaces\IClickable.cs" />
+    <Compile Include="Model\Data\Interfaces\IProducing.cs" />
+    <Compile Include="Model\Data\Metarial.cs" />
+    <Compile Include="Model\Data\Sprite.cs" />
+    <Compile Include="Model\Logic\AnimatorComponent.cs" />
+    <Compile Include="View\BitmapContainer.cs" />
+    <Compile Include="Controller\InputController.cs" />
     <Compile Include="View\GameGraphics.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

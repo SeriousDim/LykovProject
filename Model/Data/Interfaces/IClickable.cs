@@ -8,5 +8,6 @@ namespace LykovProject.Data.Interfaces
 {
     interface IClickable
     {
+        void OnClick();
     }
 }
