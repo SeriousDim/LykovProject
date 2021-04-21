@@ -30,4 +30,4 @@
 - Нападение дикарей или разбойников
 
 ## Че щас есть
-https://disk.yandex.ru/i/O2Q5wTr2zkzsPw
+![ddd](/Screenshot/SubTycoon1.PNG)
