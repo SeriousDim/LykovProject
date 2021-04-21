@@ -30,4 +30,4 @@
 - Нападение дикарей или разбойников
 
 ## Че щас есть
-![ddd](/Screenshot/SubTycoon1.PNG)
+![](/Screenshots/SubTyccon1.PNG)
