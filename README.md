@@ -30,4 +30,4 @@
 - Нападение дикарей или разбойников
 
 ## Че щас есть
-![](https://downloader.disk.yandex.ru/preview/ece8b339b89c3087b29fdeaab4fae05a0b75d1e2ad0c1d35acd6d136e07142d0/60771409/erFjtlUlrYlt9Yp90A6XLoyLdnKimm4_ca72YNY5UfilPIZmNjt7AP6Q8BSqgzAnbEW0SdpODZrlxAnIchaGHw%3D%3D?uid=0&filename=SubTyccon1.PNG&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048)
+https://downloader.disk.yandex.ru/preview/ece8b339b89c3087b29fdeaab4fae05a0b75d1e2ad0c1d35acd6d136e07142d0/60771409/erFjtlUlrYlt9Yp90A6XLoyLdnKimm4_ca72YNY5UfilPIZmNjt7AP6Q8BSqgzAnbEW0SdpODZrlxAnIchaGHw%3D%3D?uid=0&filename=SubTyccon1.PNG&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048
