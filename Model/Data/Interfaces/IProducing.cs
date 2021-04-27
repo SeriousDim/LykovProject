@@ -7,8 +7,9 @@ using LykovProject.Model.Data;
 
 namespace LykovProject.Data.Interfaces
 {
-    interface IProducing
+    public interface IProducing
     {
         Material Produce(Material from);
+        void Send(Conveyor to, Material mat);
     }
 }

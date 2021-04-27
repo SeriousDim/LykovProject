@@ -76,11 +76,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Data\AbstractInfrastucture.cs" />
+    <Compile Include="Model\Data\Conveyor.cs" />
+    <Compile Include="Model\Data\CostableObject.cs" />
     <Compile Include="Model\Data\Enums.cs" />
+    <Compile Include="Model\Data\GameCell.cs" />
+    <Compile Include="Model\Data\GameWorld.cs" />
+    <Compile Include="Model\Data\InfraClasses\StorageInfra.cs" />
     <Compile Include="Model\Data\Interfaces\IChangable.cs" />
     <Compile Include="Model\Data\Interfaces\IClickable.cs" />
     <Compile Include="Model\Data\Interfaces\IProducing.cs" />
-    <Compile Include="Model\Data\Metarial.cs" />
+    <Compile Include="Model\Data\Interfaces\IStepable.cs" />
+    <Compile Include="Model\Data\Material.cs" />
+    <Compile Include="Model\Data\PlayerData.cs" />
+    <Compile Include="Model\Data\Prefabs.cs" />
     <Compile Include="Model\Data\Sprite.cs" />
     <Compile Include="Model\Logic\AnimatorComponent.cs" />
     <Compile Include="View\BitmapContainer.cs" />
@@ -121,5 +130,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

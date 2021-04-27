@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LykovProject.View
 {
-    internal class GameGraphics
+    public class GameGraphics
     {
         // Константные поля
         private static readonly Pen GRAY_PEN = new Pen(Color.Gray);
@@ -19,10 +19,11 @@ namespace LykovProject.View
         private const int CELL_SIZE = 48;
 
         // Остальные приватные поля
-        private static float x = 0;
-        private static float scale = 1;
+        public static float DeltaX = 0;
+        public static float DeltaY = 0;
+        public static float Scale = 1;
 
-        private static Point cursor;
+        public static Point Cursor { get; set; }
 
         public static void RotateBitmap(Graphics g, Bitmap bmp, PointF p, float angleDeg)
         {
@@ -37,22 +38,37 @@ namespace LykovProject.View
             g.TranslateTransform(-p.X, -p.Y);
         }
 
-        public static void RenderField(Graphics g, PointF point, int width, int height, Bitmap sprite)
+        public static void RenderField(Graphics g, PointF point, Bitmap sprite)
         {
-            for (var i = 0; i < width; i++)
+            for (var i = 0; i < WIDTH; i++)
             {
-                for (var j = 0; j < height; j++)
+                for (var j = 0; j < HEIGHT; j++)
                 {
                     g.DrawImage(sprite, new PointF(point.X + sprite.Width * i, point.Y + sprite.Height * j));
                 }
             }
         }
 
+        public static void RenderCells(Graphics g, int cellSize)
+        {
+            for (var i = 0; i < WIDTH; i++)
+                g.DrawLine(GRAY_PEN, 0 + cellSize * i, 0, 0 + cellSize * i, HEIGHT * cellSize);
+
+            for (var j = 0; j < HEIGHT; j++)
+                g.DrawLine(GRAY_PEN, 0, 0 + cellSize * j, WIDTH * cellSize, 0 + cellSize * j);
+        }
+
         public static void ShowHoveredCell(Graphics g)
         {
-            var indX = (int)Math.Floor(((double)cursor.X - x) * (scale) / CELL_SIZE);
-            var indY = (int)Math.Floor((double)cursor.Y * (scale) / CELL_SIZE);
-            g.FillRectangle(RED_BRUSH, CELL_SIZE * indX, CELL_SIZE * indY, CELL_SIZE, CELL_SIZE);
+            var worldC = ToWorldCoords(new PointF { X = Cursor.X, Y = Cursor.Y });
+            g.FillRectangle(RED_BRUSH, CELL_SIZE * worldC.X, CELL_SIZE * worldC.Y, CELL_SIZE, CELL_SIZE);
+        }
+
+        public static PointF ToWorldCoords(PointF screenCoords)
+        {
+            return new PointF(
+                (int)Math.Floor(((double)screenCoords.X - DeltaX) * (1 / Scale) / CELL_SIZE),
+                (int)Math.Floor(((double)screenCoords.Y - DeltaY) * (1 / Scale) / CELL_SIZE));
         }
 
         public static void DebugCells(Graphics g, int cellSize, int width, int height)

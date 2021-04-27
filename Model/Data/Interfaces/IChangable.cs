@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LykovProject.Data.Interfaces
 {
-    interface IChangable
+    public interface IChangable
     {
         void OnTick();
     }

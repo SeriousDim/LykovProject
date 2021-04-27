@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;s
+using System.Drawing;
 
 namespace LykovProject.Model.Data
 {
@@ -27,6 +27,7 @@ namespace LykovProject.Model.Data
         public Sprite(string path)
         {
             this.path = path;
+            this.Bitmap = LoadSprite(path);
         }
 
         public Sprite(Bitmap bitmap)
@@ -34,10 +35,20 @@ namespace LykovProject.Model.Data
             this.Bitmap = bitmap;
         }
 
-        // загружает спрайт из path и сохраняет его в bitmap
-        public void LoadSprite()
+        public Sprite(Color color, int size)
         {
+            this.bitmap = new Bitmap(size, size);
+            using (Graphics gfx = Graphics.FromImage(bitmap))
+            using (SolidBrush brush = new SolidBrush(color))
+            {
+                gfx.FillRectangle(brush, 0, 0, size, size);
+            }
+        }
 
+        // загружает спрайт из path и сохраняет его в bitmap
+        public Bitmap LoadSprite(string path)
+        {
+            return new Bitmap(@"..\..\..\Assets\"+path);
         }
     }
 }

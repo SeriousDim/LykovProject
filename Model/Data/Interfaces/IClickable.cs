@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LykovProject.Data.Interfaces
 {
-    interface IClickable
+    public interface IClickable
     {
         void OnClick();
     }
