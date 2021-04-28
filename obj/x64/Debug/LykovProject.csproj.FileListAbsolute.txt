@@ -11,3 +11,16 @@ C:\My folder\Projects\LykovProject\LykovProject\obj\x64\Debug\LykovProject.cspro
 C:\My folder\Projects\LykovProject\LykovProject\obj\x64\Debug\LykovProject.csproj.CopyComplete
 C:\My folder\Projects\LykovProject\LykovProject\obj\x64\Debug\LykovProject.exe
 C:\My folder\Projects\LykovProject\LykovProject\obj\x64\Debug\LykovProject.pdb
+C:\My folder\Projects\My Game Project\LykovProject\bin\x64\Debug\LykovProject.exe.config
+C:\My folder\Projects\My Game Project\LykovProject\bin\x64\Debug\LykovProject.exe
+C:\My folder\Projects\My Game Project\LykovProject\bin\x64\Debug\LykovProject.pdb
+C:\My folder\Projects\My Game Project\LykovProject\bin\x64\Debug\d2dlibexport.dll
+C:\My folder\Projects\My Game Project\LykovProject\bin\x64\Debug\d2dwinform.dll
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.csprojAssemblyReference.cache
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.Form1.resources
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.Properties.Resources.resources
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.csproj.GenerateResource.cache
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.csproj.CoreCompileInputs.cache
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.csproj.CopyComplete
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.exe
+C:\My folder\Projects\My Game Project\LykovProject\obj\x64\Debug\LykovProject.pdb
