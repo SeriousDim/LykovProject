@@ -1,4 +1,6 @@
 ﻿using LykovProject.Controller;
+using LykovProject.Model.Data;
+using LykovProject.Model.Logic;
 using LykovProject.View;
 using System;
 using System.Collections.Generic;
@@ -22,8 +24,23 @@ namespace LykovProject
         private TableLayoutPanel panel;
         private TableLayoutPanel console;
 
+        private GameLoop loop;
+        private GameWorld world;
+
         private BitmapContainer cont;
-        private InputController<Form1> input;
+
+        public Form1()
+        {
+            world = new GameWorld("Joe Doe", 5000, 100, 500, 200);
+
+            KeyPreview = true;
+            InitializeComponent();
+        }
+
+        public void OnLoopInvalidation()
+        {
+            box.Invalidate();
+        }
 
         private void RenderGame(object sender, PaintEventArgs e)
         {
@@ -41,22 +58,18 @@ namespace LykovProject
             g.DrawImage(cont.Get("grass"), new PointF(100, 100));
         }
 
-        private Action GetBoxUpdater(Action a)
+        private void AddActions(InputController<Form1> input)
         {
-            return () => { a.Invoke(); box.Invalidate(); };
+            input.AddAction(Keys.Right, () => GameGraphics.DeltaX -= 45);
+            input.AddAction(Keys.Left, () => GameGraphics.DeltaX += 45);
+            input.AddAction(Keys.Up, () => GameGraphics.Scale += 0.05f);
+            input.AddAction(Keys.Down, () => GameGraphics.Scale -= 0.05f);
         }
 
-        private void AddActions()
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            input.AddAction(Keys.Right, GetBoxUpdater(() => GameGraphics.DeltaX -= 45));
-            input.AddAction(Keys.Left, GetBoxUpdater(() => GameGraphics.DeltaX += 45));
-            input.AddAction(Keys.Up, GetBoxUpdater(() => GameGraphics.Scale += 0.05f));
-            input.AddAction(Keys.Down, GetBoxUpdater(() => GameGraphics.Scale -= 0.05f));
-        }
-
-        public Form1()
-        {
-            InitializeComponent();
+            loop.cont.EnqueueKey(keyData);
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -64,9 +77,6 @@ namespace LykovProject
             base.OnLoad(e);
 
             cont = new BitmapContainer();
-            input = new InputController<Form1>(this);
-
-            AddActions();
 
             box = new PictureBox()
             {
@@ -101,18 +111,16 @@ namespace LykovProject
             panel.Dock = DockStyle.Fill;
             Controls.Add(panel);
 
-            KeyDown += new KeyEventHandler(this.Form1_KeyDown);
+            loop = new GameLoop(world, this);
+            loop.Start();
+
+            AddActions(loop.cont);
         }
 
         private void Form1_MouseHover(object sender, MouseEventArgs e)
         {
             GameGraphics.Cursor = e.Location;
             box.Invalidate();
-        }
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            input.ProcessKey(e.KeyCode);
         }
     }
 }

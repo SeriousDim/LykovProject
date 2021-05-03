@@ -13,6 +13,11 @@ namespace LykovProject.Model.Data.InfraClasses
             
         }
 
+        public override void OnTick()
+        {
+            
+        }
+
         // логика этого здания
     }
 }

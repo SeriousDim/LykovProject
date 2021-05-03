@@ -12,5 +12,13 @@ namespace LykovProject.Model.Data
         public int y;
         public AbstractInfrastucture infra;
         public bool land;
+
+        public GameCell(int x, int y, AbstractInfrastucture infra, bool land)
+        {
+            this.x = x;
+            this.y = y;
+            this.infra = infra;
+            this.land = land;
+        }
     }
 }

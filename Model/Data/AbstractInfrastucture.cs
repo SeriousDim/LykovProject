@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LykovProject.Data.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LykovProject.Model.Data
 {
-    abstract public class AbstractInfrastucture
+    abstract public class AbstractInfrastucture : IChangable
     {
         public List<Conveyor> conveyors;
         public List<Material> rawMaterials;
@@ -31,5 +32,7 @@ namespace LykovProject.Model.Data
             this.owner = null;
             this.level = 1;
         }
+
+        public abstract void OnTick();
     }
 }

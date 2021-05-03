@@ -12,11 +12,33 @@ namespace LykovProject.Controller
     {
         private F form;
         private Dictionary<Keys, Action> actions;
+        private Keys action;
+
+        public object locker;
 
         public InputController(F form)
         {
             this.form = form;
             this.actions = new Dictionary<Keys, Action>();
+            locker = new object();
+        }
+
+        public void EnqueueKey(Keys k)
+        {
+            lock (locker)
+                action = k;
+        }
+
+        public void ProccessQueue()
+        {
+            lock (locker)
+            {
+                if (action != Keys.None)
+                {
+                    ProcessKey(action);
+                    action = Keys.None;
+                }
+            }
         }
 
         public void AddAction(Keys k, Action act)
