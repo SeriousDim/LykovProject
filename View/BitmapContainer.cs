@@ -42,5 +42,11 @@ namespace LykovProject
             return this[key].Bitmap;
         }
 
+        public void SetResolution(int size)
+        {
+            foreach (var key in sprites.Keys)
+                sprites[key].Bitmap = new Bitmap(sprites[key].Bitmap, new Size(size, size));
+        }
+
     }
 }

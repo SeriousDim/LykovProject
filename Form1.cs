@@ -27,11 +27,12 @@ namespace LykovProject
         private GameLoop loop;
         private GameWorld world;
 
-        private BitmapContainer cont;
+        private BitmapContainer btms;
 
         public Form1()
         {
-            world = new GameWorld("Joe Doe", 5000, 100, 500, 200);
+            world = new GameWorld("Joe Doe", 5000, 20, 500, 100);
+            GameGraphics.DeltaX = -world.Width * GameGraphics.CellSize * 0.5f;
 
             KeyPreview = true;
             InitializeComponent();
@@ -50,20 +51,19 @@ namespace LykovProject
             g.TranslateTransform(GameGraphics.DeltaX, GameGraphics.DeltaY);
             g.ScaleTransform(GameGraphics.Scale, GameGraphics.Scale);
 
+            GameGraphics.RenderCells(g, world);
+            GameGraphics.RenderGameWorld(g, world, btms.Get("grass"));
             GameGraphics.ShowHoveredCell(g);
-
-            GameGraphics.RenderCells(g, 48);
-            GameGraphics.RenderField(g, new PointF(200, 500), cont.Get("grass"));
-            GameGraphics.RotateBitmap(g, cont.Get("grass"), new PointF { X = 150, Y = 100 }, 45);
-            g.DrawImage(cont.Get("grass"), new PointF(100, 100));
         }
 
         private void AddActions(InputController<Form1> input)
         {
-            input.AddAction(Keys.Right, () => GameGraphics.DeltaX -= 45);
-            input.AddAction(Keys.Left, () => GameGraphics.DeltaX += 45);
-            input.AddAction(Keys.Up, () => GameGraphics.Scale += 0.05f);
-            input.AddAction(Keys.Down, () => GameGraphics.Scale -= 0.05f);
+            input.AddAction(Keys.Right, () => GameGraphics.DeltaX -= GameGraphics.CameraSpeed);
+            input.AddAction(Keys.Left, () => GameGraphics.DeltaX += GameGraphics.CameraSpeed);
+            input.AddAction(Keys.Up, () => GameGraphics.DeltaY += GameGraphics.CameraSpeed);
+            input.AddAction(Keys.Down, () => GameGraphics.DeltaY -= GameGraphics.CameraSpeed);
+            //input.AddAction(Keys.Up, () => GameGraphics.Scale += 0.05f);
+            //input.AddAction(Keys.Down, () => GameGraphics.Scale -= 0.05f);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -76,7 +76,11 @@ namespace LykovProject
         {
             base.OnLoad(e);
 
-            cont = new BitmapContainer();
+            FormClosed += Form1_FormClosed;
+            MouseWheel += Form1_MouseWheel;
+
+            btms = new BitmapContainer();
+            btms.SetResolution(GameGraphics.CellSize);
 
             box = new PictureBox()
             {
@@ -111,10 +115,21 @@ namespace LykovProject
             panel.Dock = DockStyle.Fill;
             Controls.Add(panel);
 
+            world.GenMap();
             loop = new GameLoop(world, this);
             loop.Start();
 
             AddActions(loop.cont);
+        }
+
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            GameGraphics.Scale += GameGraphics.ScaleSpeed * e.Delta;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            loop.Finish();
         }
 
         private void Form1_MouseHover(object sender, MouseEventArgs e)

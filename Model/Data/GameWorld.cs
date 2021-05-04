@@ -12,8 +12,8 @@ namespace LykovProject.Model.Data
         public GameCell[,] gameMap;
         public int groundLevel;
 
-        public int Width => gameMap.GetLength(0);
-        public int Height => gameMap.GetLength(1);
+        public int Width => gameMap.GetLength(1);
+        public int Height => gameMap.GetLength(0);
 
         public GameWorld(string playerCompanyName, int playerMoney, int groundLevel, int width, int height)
         {
@@ -32,7 +32,7 @@ namespace LykovProject.Model.Data
             
             for (var i = groundLevel; i < Height; i++)
                 for (var j = 0; j < Width; j++)
-                    gameMap[i, j] = new GameCell(i, j, null, true);
+                    gameMap[i, j] = new GameCell(i, i, null, true);
         }
 
         public void AddPlayer(string companyName, int money)
