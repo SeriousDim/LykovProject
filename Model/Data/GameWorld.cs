@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,10 @@ namespace LykovProject.Model.Data
             for (var i = groundLevel; i < Height; i++)
                 for (var j = 0; j < Width; j++)
                     gameMap[i, j] = new GameCell(i, i, null, true);
+
+            for (var i = 300; i < 310; i++)
+                for (var j = groundLevel - 3; j < groundLevel; j++)
+                    gameMap[j, i].infra = Prefabs.StorageInfra;
         }
 
         public void AddPlayer(string companyName, int money)
@@ -40,14 +45,19 @@ namespace LykovProject.Model.Data
             playerData.Add(companyName, new PlayerData(companyName, money));
         }
 
-        public void Build(AbstractInfrastucture infra)
+        public void Build(int i, int j, AbstractInfrastucture infra)
         {
-
+            gameMap[i, j].infra = infra;
         }
 
-        public void Debuild(AbstractInfrastucture infra)
+        public void Build(PointF p, AbstractInfrastucture infra)
         {
+            gameMap[(int)p.Y, (int)p.X].infra = infra;
+        }
 
+        public void Debuild(int i, int j)
+        {
+            gameMap[i, j].infra = null;
         }
     }
 }

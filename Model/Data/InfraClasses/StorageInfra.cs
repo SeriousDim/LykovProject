@@ -8,7 +8,7 @@ namespace LykovProject.Model.Data.InfraClasses
 {
     public class StorageInfra : AbstractInfrastucture
     {
-        public StorageInfra(string name, Sprite sprite) : base(name, InfraType.LAND, sprite)
+        public StorageInfra(string name, Sprite sprite) : base(name, InfraType.LAND, sprite, "buildStorage")
         {
             
         }

@@ -16,7 +16,8 @@ namespace LykovProject
         {
             this.sprites = new Dictionary<string, Sprite>();
 
-            Add("grass", "grass.png");
+            Add("grass", "grass24.png");
+            Add("storage", "storage24.png");
         }
 
         public Sprite this[string key]

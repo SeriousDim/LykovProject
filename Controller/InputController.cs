@@ -11,50 +11,90 @@ namespace LykovProject.Controller
     public class InputController<F> where F : Form
     {
         private F form;
-        private Dictionary<Keys, Action> actions;
-        private Keys action;
+        private Dictionary<Keys, Action> keyActions;
+        private Dictionary<string, Action> universalActions; // в частности, для действий, совершаемых мышкой
+
+        private Keys curKey;
+        private string curActionKey;
 
         public object locker;
 
         public InputController(F form)
         {
             this.form = form;
-            this.actions = new Dictionary<Keys, Action>();
+            this.keyActions = new Dictionary<Keys, Action>();
+            this.universalActions = new Dictionary<string, Action>();
             locker = new object();
         }
 
         public void EnqueueKey(Keys k)
         {
             lock (locker)
-                action = k;
+                curKey = k;
         }
 
-        public void ProccessQueue()
+        public void EnqueueAction(string key)
+        {
+            lock (locker)
+                curActionKey = key;
+        }
+
+        public void ProccessKey()
         {
             lock (locker)
             {
-                if (action != Keys.None)
+                if (curKey != Keys.None)
                 {
-                    ProcessKey(action);
-                    action = Keys.None;
+                    ProcessKeyAction(curKey);
+                    curKey = Keys.None;
+                }
+            }
+        }
+
+        public void ProcessAction()
+        {
+            lock (locker)
+            {
+                if (curActionKey != null)
+                {
+                    ProcessAction(curActionKey);
+                    curActionKey = null;
                 }
             }
         }
 
         public void AddAction(Keys k, Action act)
         {
-            actions.Add(k, act);
+            keyActions.Add(k, act);
+        }
+
+        public void AddAction(string s, Action act)
+        {
+            universalActions.Add(s, act);
         }
 
         public void RemoveAction(Keys key)
         {
-            if (actions.ContainsKey(key))
-                actions.Remove(key);
+            if (keyActions.ContainsKey(key))
+                keyActions.Remove(key);
         }
 
-        public void ProcessKey(Keys key)
+        public void RemoveAction(string key)
         {
-            actions[key].Invoke();
+            if (universalActions.ContainsKey(key))
+                universalActions.Remove(key);
+        }
+
+        public void ProcessKeyAction(Keys key)
+        {
+            if (keyActions.ContainsKey(key))
+                keyActions[key].Invoke();
+        }
+
+        public void ProcessAction(string key)
+        {
+            if (universalActions.ContainsKey(key))
+                universalActions[key].Invoke();
         }
     }
 }

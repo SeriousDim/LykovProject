@@ -9,6 +9,9 @@ namespace LykovProject.Model.Logic
     public class GameLoop : IStepable
     {
         public GameWorld gameWorld;
+        public GameState gameState;
+        public AbstractInfrastucture infraToBuild;
+
         public Thread gameThread;
         public Form1 form;
         public InputController<Form1> cont;
@@ -21,13 +24,49 @@ namespace LykovProject.Model.Logic
             this.form = form;
             cont = new InputController<Form1>(form);
             locker = new object();
+            gameState = GameState.PLAYING;
         }
 
-        public void ProcessInput()
+        public void ProcessEsc()
+        {
+            if (gameState != GameState.PLAYING)
+            {
+                SetPlayingState();
+            }
+            else
+                gameState = GameState.PAUSED;
+        }
+
+        public void SetDebuildingState()
+        {
+            gameState = GameState.DEBUILDING;
+        }
+
+        public void SetBuidlingState(AbstractInfrastucture infra)
+        {
+            gameState = GameState.BUILDING;
+            this.infraToBuild = infra;
+        }
+
+        public void SetPlayingState()
+        {
+            gameState = GameState.PLAYING;
+            infraToBuild = null;
+        }
+
+        public void ProcessKeyInput()
         {
             lock (cont.locker)
             {
-                cont.ProccessQueue();
+                cont.ProccessKey();
+            }
+        }
+
+        public void ProcessUniversalInput()
+        {
+            lock (cont.locker)
+            {
+                cont.ProcessAction();
             }
         }
 
@@ -61,7 +100,8 @@ namespace LykovProject.Model.Logic
         {
             while (true)
             {
-                ProcessInput();
+                ProcessKeyInput();
+                ProcessUniversalInput();
                 ProccessTicks();
 
                 // обработать что-то еще здесь

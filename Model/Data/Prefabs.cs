@@ -10,9 +10,8 @@ namespace LykovProject.Model.Data
 {
     public class Prefabs
     {
-        public StorageInfra GenStorageInfra()
-        {
-            return new StorageInfra("Хранилище", new Sprite(Color.Green, 48));
-        }
+        public static BitmapContainer btms = null;
+
+        public static StorageInfra StorageInfra => new StorageInfra("Хранилище", btms["storage"]);
     }
 }

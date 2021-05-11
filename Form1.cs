@@ -32,7 +32,7 @@ namespace LykovProject
         public Form1()
         {
             world = new GameWorld("Joe Doe", 5000, 20, 500, 100);
-            GameGraphics.DeltaX = -world.Width * GameGraphics.CellSize * 0.5f;
+            Graphx.DeltaX = -world.Width * Graphx.CellSize * 0.5f;
 
             KeyPreview = true;
             InitializeComponent();
@@ -48,22 +48,23 @@ namespace LykovProject
             Graphics g = e.Graphics;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            g.TranslateTransform(GameGraphics.DeltaX, GameGraphics.DeltaY);
-            g.ScaleTransform(GameGraphics.Scale, GameGraphics.Scale);
+            g.ScaleTransform(Graphx.Scale, Graphx.Scale);
+            g.TranslateTransform(Graphx.DeltaX, Graphx.DeltaY);
 
-            GameGraphics.RenderCells(g, world);
-            GameGraphics.RenderGameWorld(g, world, btms.Get("grass"));
-            GameGraphics.ShowHoveredCell(g);
+            Graphx.RenderCells(g, world);
+            Graphx.RenderGameWorld(g, world, btms.Get("grass"));
+            Graphx.ShowHoveredCell(g, Graphx.GetBrushByState(loop.gameState));
         }
 
         private void AddActions(InputController<Form1> input)
         {
-            input.AddAction(Keys.Right, () => GameGraphics.DeltaX -= GameGraphics.CameraSpeed);
-            input.AddAction(Keys.Left, () => GameGraphics.DeltaX += GameGraphics.CameraSpeed);
-            input.AddAction(Keys.Up, () => GameGraphics.DeltaY += GameGraphics.CameraSpeed);
-            input.AddAction(Keys.Down, () => GameGraphics.DeltaY -= GameGraphics.CameraSpeed);
-            //input.AddAction(Keys.Up, () => GameGraphics.Scale += 0.05f);
-            //input.AddAction(Keys.Down, () => GameGraphics.Scale -= 0.05f);
+            input.AddAction(Keys.Right, () => Graphx.DeltaX -= Graphx.CameraSpeed);
+            input.AddAction(Keys.Left, () => Graphx.DeltaX += Graphx.CameraSpeed);
+            input.AddAction(Keys.Up, () => Graphx.DeltaY += Graphx.CameraSpeed);
+            input.AddAction(Keys.Down, () => Graphx.DeltaY -= Graphx.CameraSpeed);
+
+            input.AddAction(Keys.Escape, () => loop.ProcessEsc());
+            input.AddAction("build", () => world.Build(Graphx.CursorToWorldCoords(), loop.infraToBuild));
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -80,7 +81,8 @@ namespace LykovProject
             MouseWheel += Form1_MouseWheel;
 
             btms = new BitmapContainer();
-            btms.SetResolution(GameGraphics.CellSize);
+            btms.SetResolution(Graphx.CellSize);
+            Prefabs.btms = btms;
 
             box = new PictureBox()
             {
@@ -89,6 +91,7 @@ namespace LykovProject
 
             box.Paint += new PaintEventHandler(this.RenderGame);
             box.MouseMove += new MouseEventHandler(this.Form1_MouseHover);
+            box.MouseClick += Box_MouseClick;
 
             panel = new TableLayoutPanel();
             console = new TableLayoutPanel();
@@ -96,15 +99,17 @@ namespace LykovProject
             console.RowStyles.Clear();
 
             panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 85));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80));
 
             console.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
             console.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
             console.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
             console.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
-            console.Controls.Add(new Button { Text = "Построить хранилище", Dock = DockStyle.Fill }, 0, 0);
+            var storageButton = new Button { Dock = DockStyle.Fill, Image = btms.Get("storage") };
+            storageButton.Click += StorageButton_Click;
+            console.Controls.Add(storageButton, 0, 0);
             console.Controls.Add(new Button { Text = "Кнопка 1", Dock = DockStyle.Fill }, 0, 1);
             console.Controls.Add(new Button { Text = "Кнопка 2", Dock = DockStyle.Fill }, 0, 2);
 
@@ -122,9 +127,20 @@ namespace LykovProject
             AddActions(loop.cont);
         }
 
+        private void StorageButton_Click(object sender, EventArgs e)
+        {
+            loop.SetBuidlingState(Prefabs.StorageInfra);
+        }
+
+        private void Box_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (loop.gameState == GameState.BUILDING)
+                loop.cont.EnqueueAction("build");
+        }
+
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
-            GameGraphics.Scale += GameGraphics.ScaleSpeed * e.Delta;
+            Graphx.Scale += Graphx.ScaleSpeed * e.Delta;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -134,7 +150,7 @@ namespace LykovProject
 
         private void Form1_MouseHover(object sender, MouseEventArgs e)
         {
-            GameGraphics.Cursor = e.Location;
+            Graphx.Cursor = e.Location;
             box.Invalidate();
         }
     }

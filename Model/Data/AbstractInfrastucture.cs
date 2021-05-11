@@ -18,12 +18,14 @@ namespace LykovProject.Model.Data
         public string owner;
         public Sprite sprite;
         public int level;
+        public string buildCommand;
 
-        protected AbstractInfrastucture(string name, InfraType type, Sprite sprite)
+        protected AbstractInfrastucture(string name, InfraType type, Sprite sprite, string buildCommand)
         {
             this.name = name;
             this.type = type;
             this.sprite = sprite;
+            this.buildCommand = buildCommand;
 
             this.conveyors = new List<Conveyor>();
             this.rawMaterials = new List<Material>();

@@ -9,15 +9,17 @@ using System.Windows.Forms;
 
 namespace LykovProject.View
 {
-    public class GameGraphics
+    public class Graphx
     {
         // Константные поля
         private static readonly Pen GRAY_PEN = new Pen(Color.Gray);
-        private static readonly SolidBrush RED_BRUSH = new SolidBrush(Color.Red);
+        public static readonly SolidBrush STANDART_BRUSH = new SolidBrush(Color.FromArgb(100, 0, 0, 0));
+        private static readonly SolidBrush BUILD_BRUSH = new SolidBrush(Color.FromArgb(100, 0, 255, 0));
+        private static readonly SolidBrush DEBUILD_BRUSH = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
 
         //private const int WIDTH = 1000;
         //private const int HEIGHT = 100;
-        private const int CELL_SIZE = 16;
+        private const int CELL_SIZE = 24;
         private const int CAMERA_SPEED = 20;
         private const float SCALE_SPEED = 0.001f;
 
@@ -52,8 +54,11 @@ namespace LykovProject.View
             {
                 for (var j = 0; j < world.Width; j++)
                 {
-                    if (world.gameMap[i, j].land)
+                    var cell = world.gameMap[i, j];
+                    if (cell.land)
                         g.DrawImage(landBitmap, new PointF(CellSize * j, CellSize * i));
+                    if (cell.infra != null)
+                        g.DrawImage(cell.infra.sprite.Bitmap, new PointF(CellSize * j, CellSize * i));
                 }
             }
         }
@@ -78,17 +83,34 @@ namespace LykovProject.View
                 g.DrawLine(GRAY_PEN, 0, 0 + CellSize * j, world.Width * CellSize, 0 + CellSize * j);
         }
 
-        public static void ShowHoveredCell(Graphics g)
+        public static Brush GetBrushByState(GameState state)
         {
-            var worldC = ToWorldCoords(new PointF { X = Cursor.X, Y = Cursor.Y });
-            g.FillRectangle(RED_BRUSH, CellSize * worldC.X, CellSize * worldC.Y, CellSize, CellSize);
+            switch (state)
+            {
+                case GameState.BUILDING:
+                    return BUILD_BRUSH;
+                case GameState.DEBUILDING:
+                    return DEBUILD_BRUSH;
+            }
+            return STANDART_BRUSH;
+        }
+
+        public static void ShowHoveredCell(Graphics g, Brush b)
+        {
+            var worldC = CursorToWorldCoords();
+            g.FillRectangle(b, CellSize * worldC.X, CellSize * worldC.Y, CellSize, CellSize);
+        }
+
+        public static PointF CursorToWorldCoords()
+        {
+            return ToWorldCoords(new PointF { X = Cursor.X, Y = Cursor.Y });
         }
 
         public static PointF ToWorldCoords(PointF screenCoords)
         {
             return new PointF(
-                (int)Math.Floor(((double)screenCoords.X - DeltaX) * (1 / Scale) / CellSize),
-                (int)Math.Floor(((double)screenCoords.Y - DeltaY) * (1 / Scale) / CellSize));
+                (int)Math.Floor(((double)screenCoords.X * (1 / Scale) - DeltaX) / CellSize),
+                (int)Math.Floor(((double)screenCoords.Y * (1 / Scale) - DeltaY)  / CellSize));
         }
 
     }
