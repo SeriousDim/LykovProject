@@ -3,7 +3,7 @@
 **Экономический симулятор горнодобывающей компании**
 
 ## Че щас есть
-![](/Screenshots/4.05.PNG?raw=true)
+![](/Screenshots/11.05.png?raw=true)
 
 (Еще в папке Screenshots есть .exalidraw файл с MVP-структурой)
 
