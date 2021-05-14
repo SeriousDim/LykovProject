@@ -45,19 +45,34 @@ namespace LykovProject.Model.Data
             playerData.Add(companyName, new PlayerData(companyName, money));
         }
 
+        public bool IsInBounds(PointF p)
+        {
+            var y = (int)p.Y;
+            var x = (int)p.X;
+            return y >= 0 && y < Height && x >= 0 && x < Width;
+        }
+
         public void Build(int i, int j, AbstractInfrastucture infra)
         {
-            gameMap[i, j].infra = infra;
+            if (gameMap[i, j].infra == null)
+                gameMap[i, j].infra = infra;
         }
 
         public void Build(PointF p, AbstractInfrastucture infra)
         {
-            gameMap[(int)p.Y, (int)p.X].infra = infra;
+            if (IsInBounds(p))
+                Build((int)p.Y, (int)p.X, infra);
         }
 
         public void Debuild(int i, int j)
         {
             gameMap[i, j].infra = null;
+        }
+
+        public void Debuild(PointF p)
+        {
+            if (IsInBounds(p))
+                Debuild((int)p.Y, (int)p.X);
         }
     }
 }
