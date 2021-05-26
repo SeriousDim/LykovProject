@@ -18,6 +18,20 @@ namespace LykovProject
 
             Add("grass", "grass24.png");
             Add("storage", "storage24.png");
+            Add("iron_ore", "iron_ore.png");
+            Add("coal_ore", "coal_ore.png");
+
+            Add("furnace", "furnace.png");
+            Add("router", "router.png");
+
+            Add("conv", "conv_left.png");
+            Add("conv_right", "conv_right.png");
+            Add("conv_up", "conv_up.png");
+            Add("conv_down", "conv_down.png");
+
+            Add("conv_mine", "conv_mine.png");
+
+            Add("drill", "drill.png");
         }
 
         public Sprite this[string key]

@@ -9,7 +9,13 @@ namespace LykovProject.Data.Interfaces
 {
     public interface IProducing
     {
-        Material Produce(Material from);
-        void Send(Conveyor to, Material mat);
+        Material Produce(Material[] from);
+
+        // всегда должен вызывать AbstractInfrastucture.AddRawMaterial
+        void Send(AbstractInfrastucture to, Material mat);
+
+        // Всегда должен вызывать AbstractInfrastucture.AddRawMaterial.
+        // Передает материал случайному соседу
+        void Send(Material mat);
     }
 }

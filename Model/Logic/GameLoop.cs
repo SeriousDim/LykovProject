@@ -1,6 +1,7 @@
 ﻿using LykovProject.Controller;
 using LykovProject.Model.Data;
 using LykovProject.Model.Data.Interfaces;
+using LykovProject.View;
 using System;
 using System.Threading;
 
@@ -10,7 +11,9 @@ namespace LykovProject.Model.Logic
     {
         public GameWorld gameWorld;
         public GameState gameState;
-        public AbstractInfrastucture infraToBuild;
+
+        public Func<AbstractInfrastucture> infraBuilder;
+        //public AbstractInfrastucture infraToBuild;
 
         public Thread gameThread;
         public Form1 form;
@@ -32,9 +35,13 @@ namespace LykovProject.Model.Logic
             if (gameState != GameState.PLAYING)
             {
                 SetPlayingState();
+                form.UpdateNotifier("");
             }
-            else
+            /*else
+            {
                 gameState = GameState.PAUSED;
+                form.UpdateNotifier("Пауза");
+            }*/
         }
 
         public void SetDebuildingState()
@@ -42,16 +49,19 @@ namespace LykovProject.Model.Logic
             gameState = GameState.DEBUILDING;
         }
 
-        public void SetBuidlingState(AbstractInfrastucture infra)
+        public void SetBuidlingState(Func<AbstractInfrastucture> infra)
         {
-            gameState = GameState.BUILDING;
-            this.infraToBuild = infra;
+            lock (cont.locker)
+            {
+                gameState = GameState.BUILDING;
+                this.infraBuilder = infra;
+            }
         }
 
         public void SetPlayingState()
         {
             gameState = GameState.PLAYING;
-            infraToBuild = null;
+            //infraBuilder = null;
         }
 
         public void ProcessKeyInput()
@@ -100,13 +110,16 @@ namespace LykovProject.Model.Logic
         {
             while (true)
             {
-                ProcessKeyInput();
-                ProcessUniversalInput();
-                ProccessTicks();
+                if (gameState != GameState.PAUSED)
+                {
+                    ProcessKeyInput();
+                    ProcessUniversalInput();
+                    ProccessTicks();
 
-                // обработать что-то еще здесь
+                    // обработать что-то еще здесь
 
-                InvalidateForm();
+                    InvalidateForm();
+                }
             }
         }
 

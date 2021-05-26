@@ -13,6 +13,11 @@ namespace LykovProject.View
         private readonly GUIListeners listeners;
 
         public PictureBox box;
+        public Label notificationField;
+        public Label inventoryField;
+
+        public TableLayoutPanel table;
+
         private TableLayoutPanel panel;
         private TableLayoutPanel console;
 
@@ -27,30 +32,136 @@ namespace LykovProject.View
             {
                 Dock = DockStyle.Fill,
             };
+            
+            inventoryField = new Label() { Dock = DockStyle.Fill, Text = "Нажмите на здание, чтобы посмотреть информацию об его инвентаре", Font = new System.Drawing.Font("Tahoma", 10) };
+            notificationField = new Label() { Dock = DockStyle.Fill, Text = "Готово", Font = new System.Drawing.Font("Tahoma", 10) };
 
-            listeners = new GUIListeners(form, box);
+            listeners = new GUIListeners(form, this);
+        }
+
+        public void UpdateNotifier(string s)
+        {
+            notificationField.Text = s;
+            //notificationField.Invalidate();
         }
 
         public TabPage CreateTabMain()
         {
             var tab = new TabPage("Главная") { Dock = DockStyle.Fill };
 
-            var table = new TableLayoutPanel() { Dock = DockStyle.Fill };
+            table = new TableLayoutPanel() { Dock = DockStyle.Fill };
             table.RowStyles.Clear();
 
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             table.Controls.Add(new Label() { Dock = DockStyle.Fill, Text = "Joe Doe", Font = new System.Drawing.Font("Tahoma", 20) }, 0, 0);
 
-            var storageButton = new Button { Dock = DockStyle.Fill, Image = form.btms.Get("storage") };
+            // ====== Информация о компании ========
+            var companyInfo = new TableLayoutPanel() { /*Dock = DockStyle.Fill*/ };
+            companyInfo.RowStyles.Clear();
+            companyInfo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            companyInfo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            companyInfo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            companyInfo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Left, Text = "$5000" }, 0, 0);
+            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Left, Text = "+ $50" }, 0, 1);
+            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Right, Text = "LVL 1" }, 1, 0);
+            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Right, Text = "" }, 1, 1);
+
+            table.Controls.Add(companyInfo);
+
+            // ======== Здания ========
+            var storageButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("storage") };
             storageButton.Click += listeners.StorageButton_Click;
-            table.Controls.Add(storageButton, 0, 1);
+            var furnaceButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("furnace") };
+            furnaceButton.Click += listeners.FurnaceButton_Click;
+
+            var buildings = new TableLayoutPanel() { /*Dock = DockStyle.Fill*/ };
+            buildings.RowStyles.Clear();
+
+            buildings.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            buildings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            buildings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            buildings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            buildings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            buildings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+
+            buildings.Controls.Add(storageButton, 0, 0);
+            buildings.Controls.Add(furnaceButton, 1, 0);
+            for (var i = 2; i <= 4; i++)
+            {
+                var emptyButton = new Button() { Dock = DockStyle.Fill, Text = " " };
+                buildings.Controls.Add(emptyButton, i, 0);
+            }
+
+            table.Controls.Add(new Label() { Dock = DockStyle.Fill, Text = "Здания" });
+            table.Controls.Add(buildings);
+
+            // ========== Конвееры ===========
+            var conv = new TableLayoutPanel() { /*Dock = DockStyle.Fill*/ };
+            conv.RowStyles.Clear();
+
+            var artiConvButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv") };
+            artiConvButton.Click += listeners.ConvButton_Click;
+
+            conv.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+
+            conv.Controls.Add(artiConvButton, 0, 0);
+            for (var i = 1; i <= 4; i++)
+            {
+                var emptyButton = new Button() { Dock = DockStyle.Fill, Text = " " };
+                conv.Controls.Add(emptyButton, i, 0);
+            }
+
+            table.Controls.Add(new Label() { Dock = DockStyle.Fill, Text = "Конвееры" });
+            table.Controls.Add(conv);
+
+            // ========= Шахты ========
+            var mines = new TableLayoutPanel() { /*Dock = DockStyle.Fill*/ };
+            mines.RowStyles.Clear();
+
+            var routerButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("router") };
+            var mineButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv_mine") };
+            var drillButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("drill") };
+            drillButton.Click += listeners.DrillButton_Click;
+
+            mines.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            mines.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            mines.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            mines.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            mines.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            mines.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+            mines.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+
+            mines.Controls.Add(routerButton, 0, 0);
+            mines.Controls.Add(drillButton, 1, 0);
+            for (var i = 2; i <= 4; i++)
+            {
+                var emptyButton = new Button() { Dock = DockStyle.Fill, Text = " " };
+                mines.Controls.Add(emptyButton, i, 0);
+            }
+
+            mines.Controls.Add(mineButton, 0, 1);
+            for (var i = 1; i <= 4; i++)
+            {
+                var emptyButton = new Button() { Dock = DockStyle.Fill, Text = " " };
+                mines.Controls.Add(emptyButton, i, 1);
+            }
+
+            table.Controls.Add(new Label() { Dock = DockStyle.Fill, Text = "Шахты" });
+            table.Controls.Add(mines);
 
             tab.Controls.Add(table);
 
@@ -75,11 +186,11 @@ namespace LykovProject.View
             return tab;
         }
 
-        public TabPage CreateTabDebug()
+        public TabPage CreateTabInventory()
         {
-            var tab = new TabPage("Debug") { Dock = DockStyle.Fill };
+            var tab = new TabPage("Инвентарь") { Dock = DockStyle.Fill };
 
-
+            tab.Controls.Add(inventoryField);
 
             return tab;
         }
@@ -91,7 +202,7 @@ namespace LykovProject.View
             tabControl.TabPages.Add(CreateTabMain());
             tabControl.TabPages.Add(CreateTabManagement());
             tabControl.TabPages.Add(CreateTabInfo());
-            tabControl.TabPages.Add(CreateTabDebug());
+            tabControl.TabPages.Add(CreateTabInventory());
 
             tabControlPanel = new TableLayoutPanel() { Dock = DockStyle.Fill };
             tabControlPanel.RowStyles.Clear();
@@ -130,8 +241,21 @@ namespace LykovProject.View
             panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80));
 
             //panel.Controls.Add(console, 0, 0);
+
+
+            var gameField = new TableLayoutPanel() { Dock = DockStyle.Fill };
+            gameField.RowStyles.Clear();
+
+            gameField.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            gameField.RowStyles.Add(new RowStyle(SizeType.Percent, 5));
+            gameField.RowStyles.Add(new RowStyle(SizeType.Percent, 95));
+
+            gameField.Controls.Add(notificationField, 0, 0);
+            gameField.Controls.Add(box, 0, 1);
+            
+
             panel.Controls.Add(tabControlPanel, 0, 0);
-            panel.Controls.Add(box, 1, 0);
+            panel.Controls.Add(gameField, 1, 0);
 
             panel.Dock = DockStyle.Fill;
         }

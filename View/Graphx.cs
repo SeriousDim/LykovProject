@@ -56,9 +56,30 @@ namespace LykovProject.View
                 {
                     var cell = world.gameMap[i, j];
                     if (cell.land)
-                        g.DrawImage(landBitmap, new PointF(CellSize * j, CellSize * i));
+                    {
+                        if (cell.ore == null)
+                            g.DrawImage(landBitmap, new PointF(CellSize * j, CellSize * i));
+                        else
+                            g.DrawImage(cell.ore.sprite.Bitmap, new PointF(CellSize * j, CellSize * i));
+                    }
+
                     if (cell.infra != null)
+                    {
                         g.DrawImage(cell.infra.sprite.Bitmap, new PointF(CellSize * j, CellSize * i));
+
+                        if (cell.infra is Conveyor)
+                        {
+                            var convey = ((Conveyor)cell.infra);
+                            foreach (var mat in convey.rawMaterials)
+                            {
+                                if (convey.matCoords.ContainsKey(mat))
+                                {
+                                    var matCoord = convey.matCoords[mat];
+                                    g.DrawImage(mat.sprite.Bitmap, new PointF(matCoord.X, matCoord.Y));
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -93,6 +114,12 @@ namespace LykovProject.View
                     return DEBUILD_BRUSH;
             }
             return STANDART_BRUSH;
+        }
+
+        public static void ShowWorldCoords(Graphics g)
+        {
+            var worldC = CursorToWorldCoords();
+            g.DrawString("X, Y: "+worldC.X+" "+worldC.Y, new Font("Tahoma", 10), Brushes.Black, -DeltaX + 20, -DeltaY + 20);
         }
 
         public static void ShowHoveredCell(Graphics g, Brush b)

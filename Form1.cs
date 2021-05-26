@@ -42,6 +42,11 @@ namespace LykovProject
             gui.box.Invalidate();
         }
 
+        public void UpdateNotifier(string s)
+        {
+            BeginInvoke(new Action(() => { gui.notificationField.Text = s; }));
+        }
+
         public void RenderGame(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -53,6 +58,7 @@ namespace LykovProject
             Graphx.RenderCells(g, world);
             Graphx.RenderGameWorld(g, world, btms.Get("grass"));
             Graphx.ShowHoveredCell(g, Graphx.GetBrushByState(loop.gameState));
+            Graphx.ShowWorldCoords(g);
         }
 
         public void AddActions(InputController<Form1> input)
@@ -63,7 +69,9 @@ namespace LykovProject
             input.AddAction(Keys.Down, () => Graphx.DeltaY -= Graphx.CameraSpeed);
 
             input.AddAction(Keys.Escape, () => loop.ProcessEsc());
-            input.AddAction("build", () => world.Build(Graphx.CursorToWorldCoords(), loop.infraToBuild));
+            input.AddAction("build", () => {
+                world.Build(world.playerCompanyName, Graphx.CursorToWorldCoords(), loop.infraBuilder.Invoke());
+            });
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

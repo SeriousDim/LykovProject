@@ -79,17 +79,21 @@
     <Compile Include="Controller\BuildingCommands.cs" />
     <Compile Include="Model\Data\AbstractInfrastucture.cs" />
     <Compile Include="Model\Data\Conveyor.cs" />
+    <Compile Include="Model\Data\Conveyors\ArticulatedConveyor.cs" />
     <Compile Include="Model\Data\CostableObject.cs" />
     <Compile Include="Model\Data\Enums.cs" />
     <Compile Include="Model\Data\GameCell.cs" />
     <Compile Include="Model\Data\GameState.cs" />
     <Compile Include="Model\Data\GameWorld.cs" />
+    <Compile Include="Model\Data\InfraClasses\DrillInfra.cs" />
+    <Compile Include="Model\Data\InfraClasses\FurnaceInfra.cs" />
     <Compile Include="Model\Data\InfraClasses\StorageInfra.cs" />
     <Compile Include="Model\Data\Interfaces\IChangable.cs" />
     <Compile Include="Model\Data\Interfaces\IClickable.cs" />
     <Compile Include="Model\Data\Interfaces\IProducing.cs" />
     <Compile Include="Model\Data\Interfaces\IStepable.cs" />
     <Compile Include="Model\Data\Material.cs" />
+    <Compile Include="Model\Data\Ore.cs" />
     <Compile Include="Model\Data\PlayerData.cs" />
     <Compile Include="Model\Data\Prefabs.cs" />
     <Compile Include="Model\Data\Sprite.cs" />
@@ -108,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\GUIContainer.cs" />
     <Compile Include="View\GUIListeners.cs" />
+    <Compile Include="View\Notifier.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

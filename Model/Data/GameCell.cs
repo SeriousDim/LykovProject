@@ -11,6 +11,7 @@ namespace LykovProject.Model.Data
         public int x;
         public int y;
         public AbstractInfrastucture infra;
+        public Ore ore;
         public bool land;
 
         public GameCell(int x, int y, AbstractInfrastucture infra, bool land)
@@ -19,6 +20,16 @@ namespace LykovProject.Model.Data
             this.y = y;
             this.infra = infra;
             this.land = land;
+            this.ore = null;
+        }
+
+        public GameCell(int x, int y, AbstractInfrastucture infra, bool land, Ore ore)
+        {
+            this.x = x;
+            this.y = y;
+            this.infra = infra;
+            this.land = land;
+            this.ore = ore;
         }
     }
 }
