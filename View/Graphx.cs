@@ -64,19 +64,25 @@ namespace LykovProject.View
                     }
 
                     if (cell.infra != null)
-                    {
                         g.DrawImage(cell.infra.sprite.Bitmap, new PointF(CellSize * j, CellSize * i));
+                }
+            }
 
+            for (var i = 0; i < world.Height; i++)
+            {
+                for (var j = 0; j < world.Width; j++)
+                {
+                    var cell = world.gameMap[i, j];
+
+                    if (cell.infra != null)
+                    {
                         if (cell.infra is Conveyor)
                         {
                             var convey = ((Conveyor)cell.infra);
+
                             foreach (var mat in convey.rawMaterials)
                             {
-                                if (convey.matCoords.ContainsKey(mat))
-                                {
-                                    var matCoord = convey.matCoords[mat];
-                                    g.DrawImage(mat.sprite.Bitmap, new PointF(matCoord.X, matCoord.Y));
-                                }
+                                g.DrawImage(mat.sprite.Bitmap, mat.point);
                             }
                         }
                     }

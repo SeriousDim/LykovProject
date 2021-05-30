@@ -47,6 +47,24 @@ namespace LykovProject.View
             notificationField.Text = "ЛКМ - построить, стрелки NUMPAD - повернуть, ESC - закончить строительство";
         }
 
+        public void ConvRightButton_Click(object sender, EventArgs e)
+        {
+            form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorRight);
+            notificationField.Text = "ЛКМ - построить, стрелки NUMPAD - повернуть, ESC - закончить строительство";
+        }
+
+        public void ConvUpButton_Click(object sender, EventArgs e)
+        {
+            form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorUp);
+            notificationField.Text = "ЛКМ - построить, стрелки NUMPAD - повернуть, ESC - закончить строительство";
+        }
+
+        public void ConvDownButton_Click(object sender, EventArgs e)
+        {
+            form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorDown);
+            notificationField.Text = "ЛКМ - построить, стрелки NUMPAD - повернуть, ESC - закончить строительство";
+        }
+
         public void Box_MouseClick(object sender, MouseEventArgs e)
         {
             if (form.loop.gameState == GameState.BUILDING)

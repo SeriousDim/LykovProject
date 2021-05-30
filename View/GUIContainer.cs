@@ -110,6 +110,12 @@ namespace LykovProject.View
 
             var artiConvButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv") };
             artiConvButton.Click += listeners.ConvButton_Click;
+            var artiConvRightButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv_right") };
+            artiConvRightButton.Click += listeners.ConvRightButton_Click;
+            var artiConvUpButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv_up") };
+            artiConvUpButton.Click += listeners.ConvUpButton_Click;
+            var artiConvDownButton = new Button() { Dock = DockStyle.Fill, Image = form.btms.Get("conv_down") };
+            artiConvDownButton.Click += listeners.ConvDownButton_Click;
 
             conv.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
@@ -119,11 +125,10 @@ namespace LykovProject.View
             conv.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
 
             conv.Controls.Add(artiConvButton, 0, 0);
-            for (var i = 1; i <= 4; i++)
-            {
-                var emptyButton = new Button() { Dock = DockStyle.Fill, Text = " " };
-                conv.Controls.Add(emptyButton, i, 0);
-            }
+            conv.Controls.Add(artiConvRightButton, 1, 0);
+            conv.Controls.Add(artiConvUpButton, 2, 0);
+            conv.Controls.Add(artiConvDownButton, 3, 0);
+            conv.Controls.Add(new Button() { Dock = DockStyle.Fill, Text = " " }, 4, 0);
 
             table.Controls.Add(new Label() { Dock = DockStyle.Fill, Text = "Конвееры" });
             table.Controls.Add(conv);

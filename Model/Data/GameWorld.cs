@@ -32,11 +32,11 @@ namespace LykovProject.Model.Data
         {
             for (var i = 0; i < groundLevel; i++)
                 for (var j = 0; j < Width; j++)
-                    gameMap[i, j] = new GameCell(i, j, null, false);
+                    gameMap[i, j] = new GameCell(j, i, null, false);
             
             for (var i = groundLevel; i < Height; i++)
                 for (var j = 0; j < Width; j++)
-                    gameMap[i, j] = new GameCell(i, i, null, true);
+                    gameMap[i, j] = new GameCell(j, i, null, true);
 
             for (var i = 300; i < 310; i++)
                 for (var j = groundLevel - 3; j < groundLevel; j++)
@@ -68,6 +68,7 @@ namespace LykovProject.Model.Data
             if (gameMap[i, j].infra == null)
             {
                 gameMap[i, j].infra = infra;
+                playerData[playerCompanyName].infraList.Add(infra);
             }
         }
 

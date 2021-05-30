@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace LykovProject.Model.Data
 {
@@ -22,6 +23,8 @@ namespace LykovProject.Model.Data
         public int level;
         public string buildCommand;
 
+        protected object locker;
+
         protected AbstractInfrastucture(string name, InfraType type, Sprite sprite, int amount, string buildCommand)
         {
             this.name = name;
@@ -36,6 +39,8 @@ namespace LykovProject.Model.Data
             this.bottomLeftPosition = null;
             this.owner = null;
             this.level = 1;
+
+            this.locker = new object();
         }
 
         protected AbstractInfrastucture(string name, InfraType type, Sprite sprite, string buildCommand)
@@ -52,6 +57,8 @@ namespace LykovProject.Model.Data
             this.bottomLeftPosition = null;
             this.owner = null;
             this.level = 1;
+
+            this.locker = new object();
         }
 
         public void OnBuild(GameCell pos, PlayerData owner)
@@ -69,19 +76,34 @@ namespace LykovProject.Model.Data
         // определяет, как добавлять материал в эту инфраструктуру
         public virtual void AddRawMaterial(Material mat)
         {
-            if (mat != null)
+            lock (locker)
             {
-                if (rawMaterials.Count < amount)
+                if (mat != null)
                 {
-                    rawMaterials.Add(mat);
+                    if (rawMaterials.Count < amount)
+                    {
+                        rawMaterials.Add(mat);
+                    }
                 }
+            }
+        }
+
+        public IEnumerable<Material> IterateMaterials()
+        {
+            lock (locker)
+            {
+                foreach (var e in rawMaterials)
+                    yield return e;
             }
         }
 
         public void RemoveRawMaterial(int index)
         {
-            if (index >= 0 && index < rawMaterials.Count)
-                rawMaterials.RemoveAt(index);
+            lock (locker)
+            {
+                if (index >= 0 && index < rawMaterials.Count)
+                    rawMaterials.RemoveAt(index);
+            }
         }
 
         public string RawMatToString()

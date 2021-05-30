@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace LykovProject.Model.Data
 {
     public class Material
     {
+        public PointF point;
+
         public int relativeValue;
         public string name;
         public string description;
@@ -23,6 +26,16 @@ namespace LykovProject.Model.Data
             this.description = description;
             this.sprite = sprite;
             this.type = type;
+        }
+
+        public void SetPosition(float x, float y)
+        {
+            point = new PointF(x, y);
+        }
+
+        public void SetPosition(PointF p)
+        {
+            point = p;
         }
     }
 }

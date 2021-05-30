@@ -12,12 +12,10 @@ namespace LykovProject.Model.Data
 {
     public class Conveyor : AbstractInfrastucture
     {
-        public static PointF LEFT = new PointF(1, 0);
-        public static PointF RIGHT = new PointF(-1, 0);
-        public static PointF UP = new PointF(0, -1);
-        public static PointF DOWN = new PointF(0, 1);
-
-        public Dictionary<Material, PointF> matCoords;
+        public static PointF LEFT = new PointF(0, -1);
+        public static PointF RIGHT = new PointF(0, 1);
+        public static PointF UP = new PointF(-1, 0);
+        public static PointF DOWN = new PointF(1, 0);
 
         private float transportSpeedInPxPerMs;
         private PointF direction;
@@ -29,7 +27,6 @@ namespace LykovProject.Model.Data
             this.sprite = sprite;
             this.transportSpeedInPxPerMs = speed;
 
-            this.matCoords = new Dictionary<Material, PointF>();
             this.direction = direction;
         }
 
@@ -46,9 +43,12 @@ namespace LykovProject.Model.Data
 
         public override void OnTick()
         {
-            foreach (var m in rawMaterials)
+            lock (locker)
             {
-                MoveMaterial(m);
+                foreach (var m in IterateMaterials())
+                {
+                    MoveMaterial(m);
+                }
             }
         }
 
@@ -56,10 +56,10 @@ namespace LykovProject.Model.Data
         {
             var x = bottomLeftPosition.x;
             var y = bottomLeftPosition.y;
-            var cs = Graphx.CellSize;
+            var cs = (float)Graphx.CellSize;
 
             if (direction.Equals(LEFT))
-                return new PointF(x * cs, (y + 0.5f) * cs);
+                return new PointF((y + 0.5f) * cs, x * cs);
             if (direction.Equals(RIGHT))
                 return new PointF((x + 1) * cs, (y + 0.5f) * cs);
             if (direction.Equals(UP))
@@ -69,20 +69,21 @@ namespace LykovProject.Model.Data
 
         public void MoveMaterial(Material mat)
         {
-            if (matCoords.ContainsKey(mat))
-            {
-                matCoords[mat] += new Size((int)(direction.X * transportSpeedInPxPerMs), (int)(direction.Y * transportSpeedInPxPerMs));
-            }
+            var old = mat.point;
+            mat.SetPosition(new PointF() { X = old.X + direction.Y * transportSpeedInPxPerMs, Y = old.Y + direction.X * transportSpeedInPxPerMs });
         }
 
         public override void AddRawMaterial(Material mat)
         {
-            if (mat != null)
+            lock (locker)
             {
-                if (rawMaterials.Count < amount)
+                if (mat != null)
                 {
-                    rawMaterials.Add(mat);
-                    matCoords.Add(mat, GetStartMaterialWorldPoint());
+                    if (rawMaterials.Count < amount)
+                    {
+                        mat.SetPosition(GetStartMaterialWorldPoint());
+                        rawMaterials.Add(mat);
+                    }
                 }
             }
         }

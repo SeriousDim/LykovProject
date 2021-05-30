@@ -19,13 +19,14 @@ namespace LykovProject.Model.Data
         public static Ore IronOre => new Ore("Железная руда", btms["iron_ore"], RawIron);
         public static Ore CoalOre => new Ore("Угольная руда", btms["coal_ore"], RawCoal);
 
-        public static ArticulatedConveyor ArticulatedConveyorLeft => new ArticulatedConveyor("Шарнирный конвеер", btms["conv"], 0.024f, Conveyor.LEFT);
-        public static ArticulatedConveyor ArticulatedConveyorRight => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_right"], 0.024f, Conveyor.RIGHT);
-        public static ArticulatedConveyor ArticulatedConveyorUp => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_up"], 0.024f, Conveyor.UP);
-        public static ArticulatedConveyor ArticulatedConveyorDown => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_down"], 0.024f, Conveyor.DOWN);
+        private const float ARTICULATED_SPEED = 0.00024f;
+        public static ArticulatedConveyor ArticulatedConveyorLeft => new ArticulatedConveyor("Шарнирный конвеер", btms["conv"], ARTICULATED_SPEED, Conveyor.LEFT);
+        public static ArticulatedConveyor ArticulatedConveyorRight => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_right"], ARTICULATED_SPEED, Conveyor.RIGHT);
+        public static ArticulatedConveyor ArticulatedConveyorUp => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_up"], ARTICULATED_SPEED, Conveyor.UP);
+        public static ArticulatedConveyor ArticulatedConveyorDown => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_down"], ARTICULATED_SPEED, Conveyor.DOWN);
 
         public static StorageInfra StorageInfra => new StorageInfra("Хранилище", btms["storage"]);
         public static FurnaceInfra FurnaceInfra => new FurnaceInfra("Печь", btms["furnace"]);
-        public static DrillInfra DrillInfra => new DrillInfra("Бур", btms["drill"], 2000);
+        public static DrillInfra DrillInfra => new DrillInfra("Бур", btms["drill"], 1000);
     }
 }
