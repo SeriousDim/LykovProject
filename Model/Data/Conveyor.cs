@@ -59,9 +59,9 @@ namespace LykovProject.Model.Data
             var cs = (float)Graphx.CellSize;
 
             if (direction.Equals(LEFT))
-                return new PointF((y + 0.5f) * cs, x * cs);
-            if (direction.Equals(RIGHT))
                 return new PointF((x + 1) * cs, (y + 0.5f) * cs);
+            if (direction.Equals(RIGHT))
+                return new PointF(x * cs, (y + 0.5f) * cs);
             if (direction.Equals(UP))
                 return new PointF((x + 0.5f) * cs, (y + 1) * cs);
             return new PointF((x + 0.5f) * cs, y * cs);

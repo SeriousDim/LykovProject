@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LykovProject.Model.Data
 {
-    public class Material
+    public class Material : ICloneable
     {
         public PointF point;
 
@@ -28,6 +28,12 @@ namespace LykovProject.Model.Data
             this.type = type;
         }
 
+        public object Clone()
+        {
+            return new Material(this.relativeValue, this.name, this.description,
+                this.sprite, this.type);
+        }
+
         public void SetPosition(float x, float y)
         {
             point = new PointF(x, y);
@@ -37,5 +43,7 @@ namespace LykovProject.Model.Data
         {
             point = p;
         }
+
+
     }
 }

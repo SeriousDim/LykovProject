@@ -19,7 +19,7 @@ namespace LykovProject.Model.Data
         public static Ore IronOre => new Ore("Железная руда", btms["iron_ore"], RawIron);
         public static Ore CoalOre => new Ore("Угольная руда", btms["coal_ore"], RawCoal);
 
-        private const float ARTICULATED_SPEED = 0.00024f;
+        private const float ARTICULATED_SPEED = 0.0005f; // 0.00024f
         public static ArticulatedConveyor ArticulatedConveyorLeft => new ArticulatedConveyor("Шарнирный конвеер", btms["conv"], ARTICULATED_SPEED, Conveyor.LEFT);
         public static ArticulatedConveyor ArticulatedConveyorRight => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_right"], ARTICULATED_SPEED, Conveyor.RIGHT);
         public static ArticulatedConveyor ArticulatedConveyorUp => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_up"], ARTICULATED_SPEED, Conveyor.UP);

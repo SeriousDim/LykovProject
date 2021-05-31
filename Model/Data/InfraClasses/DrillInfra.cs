@@ -43,7 +43,7 @@ namespace LykovProject.Model.Data.InfraClasses
 
         public Material Produce(Material[] from)
         {
-            return bottomLeftPosition.ore.resultMaterial;
+            return (Material)bottomLeftPosition.ore.resultMaterial.Clone();
         }
 
         public void Send(AbstractInfrastucture to, Material mat)
@@ -61,7 +61,7 @@ namespace LykovProject.Model.Data.InfraClasses
             {
                 if (neighbors.Count > 0)
                 {
-                    var cell = neighbors.Keys.ElementAt(random.Next(0, neighbors.Count - 1));
+                    var cell = neighbors.Keys.ElementAt(random.Next(0, neighbors.Count));
                     var toInfra = neighbors[cell];
 
                     if (toInfra != null && !(toInfra is DrillInfra))
