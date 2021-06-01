@@ -80,7 +80,7 @@ namespace LykovProject.View
                         {
                             var convey = ((Conveyor)cell.infra);
 
-                            foreach (var mat in convey.rawMaterials)
+                            foreach (var mat in convey.IterateMaterials())
                             {
                                 g.DrawImage(mat.sprite.Bitmap, mat.point);
                             }

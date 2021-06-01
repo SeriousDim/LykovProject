@@ -92,7 +92,8 @@ namespace LykovProject.Model.Data
         {
             lock (locker)
             {
-                foreach (var e in rawMaterials)
+                var copy = new List<Material>(rawMaterials);
+                foreach (var e in copy)
                     yield return e;
             }
         }

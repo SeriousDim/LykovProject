@@ -10,7 +10,7 @@ using LykovProject.View;
 
 namespace LykovProject.Model.Data
 {
-    public class Conveyor : AbstractInfrastucture
+    public class Conveyor : AbstractInfrastucture, IProducing
     {
         public static PointF LEFT = new PointF(0, -1);
         public static PointF RIGHT = new PointF(0, 1);
@@ -47,8 +47,19 @@ namespace LykovProject.Model.Data
             {
                 foreach (var m in IterateMaterials())
                 {
-                    MoveMaterial(m);
+                    if (IsPointInBounds(m.point))
+                        MoveMaterial(m);
                 }
+
+                var toRemove = new List<Material>();
+                foreach (var m in IterateMaterials())
+                {
+                    if (!IsPointInBounds(m.point))
+                        Send(m, toRemove);
+                }
+
+                foreach (var m in toRemove)
+                    rawMaterials.Remove(m);
             }
         }
 
@@ -59,12 +70,22 @@ namespace LykovProject.Model.Data
             var cs = (float)Graphx.CellSize;
 
             if (direction.Equals(LEFT))
-                return new PointF((x + 1) * cs, (y + 0.5f) * cs);
+                return new PointF((x + 1) * cs - 2, (y + 0.5f) * cs);
             if (direction.Equals(RIGHT))
-                return new PointF(x * cs, (y + 0.5f) * cs);
+                return new PointF(x * cs + 2, (y + 0.5f) * cs);
             if (direction.Equals(UP))
-                return new PointF((x + 0.5f) * cs, (y + 1) * cs);
-            return new PointF((x + 0.5f) * cs, y * cs);
+                return new PointF((x + 0.5f) * cs, (y + 1) * cs - 2);
+            return new PointF((x + 0.5f) * cs, y * cs + 2);
+        }
+
+        public bool IsPointInBounds(PointF p)
+        {
+            var cs = Graphx.CellSize;
+            var x = this.bottomLeftPosition.x * cs;
+            var y = this.bottomLeftPosition.y * cs;
+
+            return p.X >= x && p.X < x + cs &&
+                   p.Y >= y && p.Y < y + cs;
         }
 
         public void MoveMaterial(Material mat)
@@ -86,6 +107,43 @@ namespace LykovProject.Model.Data
                     }
                 }
             }
+        }
+
+        public Material Produce(Material[] from)
+        {
+            return null;
+        }
+
+        public void Send(AbstractInfrastucture to, Material mat)
+        {
+            throw new NotImplementedException("Use Send(Material) method instead this");
+        }
+
+        public void Send(Material mat, List<Material> toRemove)
+        {
+            if (neighbors.Count > 0)
+            {
+                var sx = bottomLeftPosition.x + direction.Y;
+                var sy = bottomLeftPosition.y + direction.X;
+
+                var cellKey = neighbors.Keys.Where(k => k.x == sx && k.y == sy).FirstOrDefault();
+
+                if (cellKey != null)
+                {
+                    var infra = neighbors[cellKey];
+
+                    if (infra != null)
+                    {
+                        infra.AddRawMaterial(mat);
+                        toRemove.Add(mat);
+                    }
+                }
+            }
+        }
+
+        public void Send(Material mat)
+        {
+            
         }
     }
 }
