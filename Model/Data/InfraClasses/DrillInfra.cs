@@ -15,7 +15,7 @@ namespace LykovProject.Model.Data.InfraClasses
         private int speedInMs;
         private Random random;
 
-        public DrillInfra(string name, Sprite sprite, int speed) : base(name, InfraType.LAND, sprite, "buildDrill")
+        public DrillInfra(string name, Sprite sprite, int speed) : base(name, InfraType.LAND, sprite, "buildDrill", 15)
         {
             this.amount = 100;
             this.speedInMs = speed;

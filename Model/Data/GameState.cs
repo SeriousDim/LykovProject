@@ -8,6 +8,6 @@ namespace LykovProject.Model.Data
 {
     public enum GameState
     {
-        PLAYING, PAUSED, BUILDING, DEBUILDING
+        PLAYING, PAUSED, BUILDING, DEBUILDING, FINISHED
     }
 }

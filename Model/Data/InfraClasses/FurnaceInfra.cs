@@ -8,7 +8,7 @@ namespace LykovProject.Model.Data.InfraClasses
 {
     public class FurnaceInfra : AbstractInfrastucture
     {
-        public FurnaceInfra(string name, Sprite sprite) : base(name, InfraType.LAND, sprite, "buildFurnace")
+        public FurnaceInfra(string name, Sprite sprite) : base(name, InfraType.LAND, sprite, "buildFurnace", 30)
         {
 
         }

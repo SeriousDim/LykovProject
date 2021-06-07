@@ -14,6 +14,8 @@ namespace LykovProject.Model.Data
         public List<Material> rawMaterials;
         public int amount;
 
+        public int price;
+
         public string name;
         public InfraType type;
         public GameCell bottomLeftPosition;
@@ -43,13 +45,15 @@ namespace LykovProject.Model.Data
             this.locker = new object();
         }
 
-        protected AbstractInfrastucture(string name, InfraType type, Sprite sprite, string buildCommand)
+        protected AbstractInfrastucture(string name, InfraType type, Sprite sprite, string buildCommand, int price)
         {
             this.name = name;
             this.type = type;
             this.sprite = sprite;
             this.buildCommand = buildCommand;
             this.amount = 100;
+
+            this.price = price;
 
             this.neighbors = new Dictionary<GameCell, AbstractInfrastucture>();
             this.rawMaterials = new List<Material>();

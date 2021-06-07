@@ -10,11 +10,13 @@ namespace LykovProject.View
     public class GUIContainer
     {
         private readonly Form1 form;
-        private readonly GUIListeners listeners;
+        public readonly GUIListeners listeners;
 
         public PictureBox box;
         public Label notificationField;
         public Label inventoryField;
+        public Label timerLabel;
+        public Label money;
 
         public TableLayoutPanel table;
 
@@ -34,7 +36,8 @@ namespace LykovProject.View
             };
             
             inventoryField = new Label() { Dock = DockStyle.Fill, Text = "Нажмите на здание, чтобы посмотреть информацию об его инвентаре", Font = new System.Drawing.Font("Tahoma", 10) };
-            notificationField = new Label() { Dock = DockStyle.Fill, Text = "Готово", Font = new System.Drawing.Font("Tahoma", 10) };
+            notificationField = new Label() { Dock = DockStyle.Fill,
+                Text = "Заработайте $6500 за отведенное вам время: добывайте материалы с помощью бура и отправляйте по конвеерам в хранилище. Удачи!", Font = new System.Drawing.Font("Tahoma", 10) };
 
             listeners = new GUIListeners(form, this);
         }
@@ -70,10 +73,13 @@ namespace LykovProject.View
             companyInfo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             companyInfo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
-            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Left, Text = "$5000" }, 0, 0);
-            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Left, Text = "+ $50" }, 0, 1);
+            money = new Label() { Dock = DockStyle.Left, Text = "$5000" };
+            companyInfo.Controls.Add(money, 0, 0);
+            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Left, Text = "" }, 0, 1);
             companyInfo.Controls.Add(new Label() { Dock = DockStyle.Right, Text = "LVL 1" }, 1, 0);
-            companyInfo.Controls.Add(new Label() { Dock = DockStyle.Right, Text = "" }, 1, 1);
+
+            timerLabel = new Label() { Dock = DockStyle.Right, Text = "99:99" };
+            companyInfo.Controls.Add(timerLabel, 1, 1);
 
             table.Controls.Add(companyInfo);
 

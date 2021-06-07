@@ -13,13 +13,13 @@ namespace LykovProject.Model.Data
     {
         public static BitmapContainer btms = null;
 
-        public static Material RawIron => new Material(3, "Железо", "", new Sprite(Color.Red, 5), MatType.RAW);
-        public static Material RawCoal => new Material(5, "Уголь", "", new Sprite(Color.Black, 5), MatType.RAW);
+        public static Material RawIron => new Material(5, "Железо", "", new Sprite(Color.Red, 8), MatType.RAW);
+        public static Material RawCoal => new Material(8, "Уголь", "", new Sprite(Color.Black, 8), MatType.RAW);
 
         public static Ore IronOre => new Ore("Железная руда", btms["iron_ore"], RawIron);
         public static Ore CoalOre => new Ore("Угольная руда", btms["coal_ore"], RawCoal);
 
-        private const float ARTICULATED_SPEED = 0.0005f; // 0.00024f
+        private const float ARTICULATED_SPEED = 0.0009f; // 0.00024f
         public static ArticulatedConveyor ArticulatedConveyorLeft => new ArticulatedConveyor("Шарнирный конвеер", btms["conv"], ARTICULATED_SPEED, Conveyor.LEFT);
         public static ArticulatedConveyor ArticulatedConveyorRight => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_right"], ARTICULATED_SPEED, Conveyor.RIGHT);
         public static ArticulatedConveyor ArticulatedConveyorUp => new ArticulatedConveyor("Шарнирный конвеер", btms["conv_up"], ARTICULATED_SPEED, Conveyor.UP);

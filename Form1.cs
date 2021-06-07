@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using unvell.D2DLib;
 using unvell.D2DLib.WinForm;
 
@@ -20,6 +21,12 @@ namespace LykovProject
 {
     public partial class Form1 : Form
     {
+        public System.Threading.Timer timer;
+        public const long timeIntervalMs = 500;
+        public long timeInMs;
+        public object timeLocker;
+        public Action intervalAction;
+
         public GameLoop loop;
         public GameWorld world;
 
@@ -35,6 +42,15 @@ namespace LykovProject
 
             KeyPreview = true;
             InitializeComponent();
+
+            timeInMs = 10 * 60 * 1000;
+        }
+
+        public void UpdateTimeLabel()
+        {
+            var min = timeInMs / 60000;
+            var sec = (timeInMs - min * 60000) / 1000;
+            BeginInvoke(new Action(() => { gui.timerLabel.Text = min + ":" + sec; }));
         }
 
         public void OnLoopInvalidation()
@@ -45,6 +61,11 @@ namespace LykovProject
         public void UpdateNotifier(string s)
         {
             BeginInvoke(new Action(() => { gui.notificationField.Text = s; }));
+        }
+
+        public void UpdateMoney()
+        {
+            BeginInvoke(new Action(() => { gui.money.Text = "$" + world.playerData[world.playerCompanyName].money + ""; }));
         }
 
         public void RenderGame(object sender, PaintEventArgs e)
@@ -70,7 +91,14 @@ namespace LykovProject
 
             input.AddAction(Keys.Escape, () => loop.ProcessEsc());
             input.AddAction("build", () => {
-                world.Build(world.playerCompanyName, Graphx.CursorToWorldCoords(), loop.infraBuilder.Invoke());
+                var c = Graphx.CursorToWorldCoords();
+
+                if (world.playerData[world.playerCompanyName].money > 0)
+                {
+                    world.Build(world.playerCompanyName, Graphx.CursorToWorldCoords(), loop.infraBuilder.Invoke());
+                    world.playerData[world.playerCompanyName].money -= loop.infraBuilder.Invoke().price;
+                    UpdateMoney();
+                }
             });
         }
 
@@ -91,10 +119,33 @@ namespace LykovProject
             gui.GenerateGUI();
 
             world.GenMap();
-            loop = new GameLoop(world, this);
+
+            loop = new GameLoop(world, this, timeInMs);
             loop.Start();
 
             AddActions(loop.cont);
+
+            var tm = new TimerCallback(new Action<object>((obj) =>
+            {
+                timeInMs -= timeIntervalMs;
+
+                UpdateTimeLabel();
+                UpdateMoney();
+
+                if (loop.gameState == GameState.FINISHED)
+                {
+                    timer.Dispose();
+                    MessageBox.Show("Вы смогли достаточно заработать. Вы обогнали конкурентов!", "Победа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                if (timeInMs <= 0)
+                {
+                    loop.Finish();
+                    timer.Dispose();
+                    MessageBox.Show("Вы не смогли заработать за отведенное время. Ваша компания обанкротилась!", "Поражение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }));
+            timer = new System.Threading.Timer(tm, null, 0, timeIntervalMs);
         }
     }
 }

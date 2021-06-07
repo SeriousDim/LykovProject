@@ -27,6 +27,8 @@ namespace LykovProject.Model.Data
             this.sprite = sprite;
             this.transportSpeedInPxPerMs = speed;
 
+            this.price = 15;
+
             this.direction = direction;
         }
 

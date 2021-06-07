@@ -9,6 +9,8 @@ namespace LykovProject.Model.Logic
 {
     public class GameLoop : IStepable
     {
+        private readonly int moneyGoal = 6500;
+
         public GameWorld gameWorld;
         public GameState gameState;
 
@@ -21,13 +23,14 @@ namespace LykovProject.Model.Logic
 
         private object locker;
 
-        public GameLoop(GameWorld gameWorld, Form1 form)
+        public GameLoop(GameWorld gameWorld, Form1 form, long timeInMs)
         {
             this.gameWorld = gameWorld;
             this.form = form;
             cont = new InputController<Form1>(form);
             locker = new object();
             gameState = GameState.PLAYING;
+
         }
 
         public void ProcessEsc()
@@ -108,10 +111,13 @@ namespace LykovProject.Model.Logic
 
         public void OnStep()
         {
-            while (true)
+            while (gameState != GameState.FINISHED)
             {
                 if (gameState != GameState.PAUSED)
                 {
+                    if (gameWorld.playerData[gameWorld.playerCompanyName].money >= moneyGoal)
+                        gameState = GameState.FINISHED;
+
                     ProcessKeyInput();
                     ProcessUniversalInput();
                     ProccessTicks();
