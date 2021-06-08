@@ -51,42 +51,42 @@ namespace LykovProject.View
         {
             var prefab = Prefabs.StorageInfra;
             form.loop.SetBuidlingState(() => Prefabs.StorageInfra);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: "+prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nХранилище. СТОИМОСТЬ: "+prefab.price;
         }
 
         public void DrillButton_Click(object sender, EventArgs e)
         {
             var prefab = Prefabs.DrillInfra;
             form.loop.SetBuidlingState(() => Prefabs.DrillInfra);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: "+prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nБур для добычи руды. СТОИМОСТЬ: "+prefab.price;
         }
 
         public void ConvButton_Click(object sender, EventArgs e)
         {
             var prefab = Prefabs.ArticulatedConveyorLeft;
             form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorLeft);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: "+prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nКонвеер. СТОИМОСТЬ: "+prefab.price;
         }
 
         public void ConvRightButton_Click(object sender, EventArgs e)
         {
             var prefab = Prefabs.ArticulatedConveyorRight;
             form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorRight);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: " + prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nКонвеер. СТОИМОСТЬ: " + prefab.price;
         }
 
         public void ConvUpButton_Click(object sender, EventArgs e)
         {
             var prefab = Prefabs.ArticulatedConveyorUp;
             form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorUp);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: " + prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nКонвеер. СТОИМОСТЬ: " + prefab.price;
         }
 
         public void ConvDownButton_Click(object sender, EventArgs e)
         {
             var prefab = Prefabs.ArticulatedConveyorDown;
             form.loop.SetBuidlingState(() => Prefabs.ArticulatedConveyorDown);
-            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nСТОИМОСТЬ: " + prefab.price;
+            notificationField.Text = "ЛКМ - построить, ESC - закончить строительство\nКонвеер. СТОИМОСТЬ: " + prefab.price;
         }
 
         public void Box_MouseClick(object sender, MouseEventArgs e)
