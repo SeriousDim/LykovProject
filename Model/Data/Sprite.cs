@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace LykovProject.Model.Data
 {
@@ -48,7 +51,8 @@ namespace LykovProject.Model.Data
         // загружает спрайт из path и сохраняет его в bitmap
         public Bitmap LoadSprite(string path)
         {
-            return new Bitmap(@"..\..\..\Assets\"+path);
+            var curDir = System.Environment.CurrentDirectory;
+            return new Bitmap(curDir + "\\..\\..\\Assets\\" + path);
         }
     }
 }
