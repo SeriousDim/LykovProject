@@ -9,7 +9,7 @@ namespace LykovProject.Model.Logic
 {
     public class GameLoop : IStepable
     {
-        private readonly int moneyGoal = 6500;
+        private readonly int moneyGoal = 6000;
 
         public GameWorld gameWorld;
         public GameState gameState;

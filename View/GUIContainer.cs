@@ -37,7 +37,7 @@ namespace LykovProject.View
             
             inventoryField = new Label() { Dock = DockStyle.Fill, Text = "Нажмите на здание, чтобы посмотреть информацию об его инвентаре", Font = new System.Drawing.Font("Tahoma", 10) };
             notificationField = new Label() { Dock = DockStyle.Fill,
-                Text = "Заработайте $6500 за отведенное вам время: добывайте материалы с помощью бура и отправляйте по конвеерам в хранилище. Удачи!", Font = new System.Drawing.Font("Tahoma", 10) };
+                Text = "Заработайте $6000 за отведенное вам время: добывайте материалы с помощью бура и отправляйте по конвеерам в хранилище. Удачи!", Font = new System.Drawing.Font("Tahoma", 10) };
 
             listeners = new GUIListeners(form, this);
         }

@@ -25,3 +25,19 @@ C:\My folder\Projects\My Game Project\LykovProject\obj\Debug\LykovProject.applic
 C:\My folder\Projects\My Game Project\LykovProject\obj\Debug\LykovProject.csproj.CopyComplete
 C:\My folder\Projects\My Game Project\LykovProject\obj\Debug\LykovProject.exe
 C:\My folder\Projects\My Game Project\LykovProject\obj\Debug\LykovProject.pdb
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\LykovProject.exe.config
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\LykovProject.exe.manifest
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\LykovProject.application
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\LykovProject.exe
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\LykovProject.pdb
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\d2dlibexport.dll
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Debug\d2dwinform.dll
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.Form1.resources
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.Properties.Resources.resources
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.csproj.GenerateResource.cache
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.csproj.CoreCompileInputs.cache
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.exe.manifest
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.application
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.csproj.CopyComplete
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.exe
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Debug\LykovProject.pdb

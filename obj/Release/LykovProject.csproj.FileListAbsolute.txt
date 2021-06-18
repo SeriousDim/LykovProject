@@ -27,3 +27,20 @@ C:\My folder\Projects\My Game Project\LykovProject\obj\Release\LykovProject.appl
 C:\My folder\Projects\My Game Project\LykovProject\obj\Release\LykovProject.csproj.CopyComplete
 C:\My folder\Projects\My Game Project\LykovProject\obj\Release\LykovProject.exe
 C:\My folder\Projects\My Game Project\LykovProject\obj\Release\LykovProject.pdb
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\LykovProject.exe.config
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\LykovProject.exe.manifest
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\LykovProject.application
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\LykovProject.exe
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\LykovProject.pdb
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\d2dlibexport.dll
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\bin\Release\d2dwinform.dll
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.csprojAssemblyReference.cache
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.Form1.resources
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.Properties.Resources.resources
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.csproj.GenerateResource.cache
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.csproj.CoreCompileInputs.cache
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.exe.manifest
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.application
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.csproj.CopyComplete
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.exe
+C:\My folder\Projects\My Game Project\Subsoil Tycoon\source code\obj\Release\LykovProject.pdb

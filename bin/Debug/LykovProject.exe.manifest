@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LykovProject.exe" size="57232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LykovProject.exe" size="75664">
       <assemblyIdentity name="LykovProject" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0V5vCf0hbVdXkOOcOLn7vW42mhCKmnqMbaNDnsNy7bk=</dsig:DigestValue>
+        <dsig:DigestValue>B/L8+A66YzHhNH0m0Le2XKY/SJtY9H3UYIaIKKw7cW8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

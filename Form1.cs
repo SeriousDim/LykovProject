@@ -43,7 +43,7 @@ namespace LykovProject
             KeyPreview = true;
             InitializeComponent();
 
-            timeInMs = 10 * 60 * 1000;
+            timeInMs = 5 * 60 * 1000;
         }
 
         public void UpdateTimeLabel()
